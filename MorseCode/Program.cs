@@ -18,7 +18,7 @@ namespace MorseCode
         {
             const string morsePath = "morse.csv";
 
-            var morseKey = new List<Translator>();
+            var morseKey = new Dictionary<string, string>();
 
             using (var reader = new StreamReader(morsePath))
             {
@@ -26,16 +26,23 @@ namespace MorseCode
                 {
                     var code = reader.ReadLine();
                     var split = code.Split(',');
-                    var translator = new Translator(split);
-                    morseKey.Add(translator);
+                    morseKey.Add(split[0], split[1]);
+                    
                 }
             }
 
-            foreach (var item in morseKey)
-            {
-                Console.WriteLine(item);
-            }
+            //foreach (var item in morseKey)
+            //{
+            //    Console.WriteLine(item.Key +item.Value);
+            //}
 
+            Console.WriteLine("Enter something and I'll translate it to morse code");
+            var userInput = Console.ReadLine();
+
+            foreach (var input in userInput)
+            {
+                Console.Write(morseKey[input.ToString()]);
+            }
 
 
 
